@@ -1,5 +1,7 @@
 package com.orangetree.tcs.cis454proj1;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * Created by Qiwu Zou on 2018/1/30.
@@ -8,8 +10,8 @@ import java.util.ArrayList;
 public class SystemCalendar {
     private static SystemCalendar instance;
     private SystemCalendar(){};
-    public ArrayList<Student> students = new ArrayList();
-    public ArrayList<Tutor> tutors = new ArrayList();
+    public static HashMap<Calendar, Appointment> appCollection = new HashMap<Calendar, Appointment>();
+    public ArrayList<Appointment> appList = new ArrayList();
     public static SystemCalendar getInstance(){
         if (instance == null){
             instance = new SystemCalendar();
@@ -18,11 +20,4 @@ public class SystemCalendar {
         return instance;
     }
 
-    public void addStudent(Student addedStudent){
-        students.add(addedStudent);
-    }
-
-    public void addTutor(Tutor addedTutor){
-        tutors.add(addedTutor);
-    }
 }
