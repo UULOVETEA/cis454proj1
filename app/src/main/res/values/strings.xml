@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">cis454proj1</string>
+    <string name="app_name">Community Tutoring Services</string>
+
+    // Main menu options
+    <string name="open_account">My Account</string>
+    <string name="schedule">My Schedule</string>
+    <string name="tutor_list">View Tutors</string>
+    <string name="my_classes">My Classes</string>
 </resources>
