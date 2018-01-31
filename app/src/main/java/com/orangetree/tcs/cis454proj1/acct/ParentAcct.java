@@ -1,5 +1,9 @@
 package com.orangetree.tcs.cis454proj1.acct;
 
+import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+
 /**
  * The ParentAcct class contains all the information of a parent user's account. Parent accounts
  * handle the business aspects of the system from the customers’ perspective. This includes viewing
@@ -12,7 +16,20 @@ package com.orangetree.tcs.cis454proj1.acct;
  */
 
 public class ParentAcct extends Account {
-    public ParentAcct (final String name, final int accountNumber) throws IllegalArgumentException {
+    private ArrayList<StudentAcct> children;
+
+
+    public ParentAcct (@NonNull final Name name, final int accountNumber) throws IllegalArgumentException {
         super(name, accountNumber, AccountType.PARENT);
+        children = new ArrayList<>();
+    }
+
+
+    public void addChild(@NonNull final StudentAcct child) {
+        children.add(child);
+    }
+
+    public ArrayList<StudentAcct> children() {
+        return children;
     }
 }

@@ -1,5 +1,7 @@
 package com.orangetree.tcs.cis454proj1.acct;
 
+import java.util.ArrayList;
+
 /**
  * The TutorAcct class contains all the information of a tutor user's account. Tutor accounts
  * handle all use cases that are specific to the teaching aspects of the system, or what the
@@ -12,7 +14,20 @@ package com.orangetree.tcs.cis454proj1.acct;
  */
 
 public class TutorAcct extends Account {
+    private ArrayList<StudentAcct> studentsTutored;
+
+
     public TutorAcct(final String name, final int accountNumber) throws IllegalArgumentException {
         super(name, accountNumber, AccountType.TUTOR);
+        studentsTutored = new ArrayList<>();
+    }
+
+
+    public void addStudent(final StudentAcct student) {
+        studentsTutored.add(student);
+    }
+
+    public int studentsTaught() {
+        return studentsTutored.size();
     }
 }

@@ -74,15 +74,15 @@ public class Name implements Comparable<Name> {
      */
     @Override
     public int compareTo(@NonNull Name name2) {
-        final String name1Str = (this.lastName() + this.toString()).toLowerCase();
-        final String name2Str = (name2.lastName() + this.toString()).toLowerCase();
-        return name1Str.compareTo(name2Str);
+        final String name1Str = this.lastName() + this.toString();
+        final String name2Str = name2.lastName() + this.toString();
+        return name1Str.compareToIgnoreCase(name2Str);
     }
 
     /**
      * Returns a string representation of the Name object.
      *
-     * @return String representing the full name
+     * @return String representing first and last name
      */
     @Override
     public String toString() {
