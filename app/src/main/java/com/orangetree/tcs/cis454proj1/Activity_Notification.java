@@ -40,6 +40,11 @@ public class Activity_Notification extends AppCompatActivity {
                         Intent intent3 = new Intent(Activity_Notification.this, Activity_Tutors.class);
                         startActivity(intent3);
                         break;
+
+                    case R.id.ic_appointment:
+                        Intent intent4 = new Intent(Activity_Notification.this, Activity_Appointment.class);
+                        startActivity(intent4);
+                        break;
                 }
                 return false;
             }
@@ -48,7 +53,7 @@ public class Activity_Notification extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.activityNotification);
         title.setText("No notifications to display");
         title.setGravity(Gravity.CENTER);
-        title.setTextSize(30);
+        title.setTextSize(25);
     }
 }
 

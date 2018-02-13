@@ -14,11 +14,11 @@ import android.widget.TextView;
  * Created by xcao07 on 2/7/2018.
  */
 
-public class Activity_Tutors extends AppCompatActivity {
+public class Activity_Appointment extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutors);
+        setContentView(R.layout.activity_appointment);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById((R.id.bottomNavView_Bar));
 
@@ -26,23 +26,24 @@ public class Activity_Tutors extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+
                     case R.id.ic_message:
-                        Intent intent1 = new Intent(Activity_Tutors.this, Activity_Message.class);
+                        Intent intent1 = new Intent(Activity_Appointment.this, Activity_Message.class);
                         startActivity(intent1);
                         break;
 
                     case R.id.ic_notification:
-                        Intent intent2 = new Intent(Activity_Tutors.this, Activity_Notification.class);
+                        Intent intent2 = new Intent(Activity_Appointment.this, Activity_Notification.class);
                         startActivity(intent2);
                         break;
 
                     case R.id.ic_tutors:
-                        Intent intent3 = new Intent(Activity_Tutors.this, Activity_Tutors.class);
+                        Intent intent3 = new Intent(Activity_Appointment.this, Activity_Tutors.class);
                         startActivity(intent3);
                         break;
 
                     case R.id.ic_appointment:
-                        Intent intent4 = new Intent(Activity_Tutors.this, Activity_Appointment.class);
+                        Intent intent4 = new Intent(Activity_Appointment.this, Activity_Appointment.class);
                         startActivity(intent4);
                         break;
                 }
@@ -50,8 +51,8 @@ public class Activity_Tutors extends AppCompatActivity {
             }
         });
 
-        TextView title = (TextView) findViewById(R.id.activityTutors);
-        title.setText("No tutors to display, please try again later");
+        TextView title = (TextView) findViewById(R.id.activityAppointment);
+        title.setText("No appointment to display");
         title.setGravity(Gravity.CENTER);
         title.setTextSize(25);
     }

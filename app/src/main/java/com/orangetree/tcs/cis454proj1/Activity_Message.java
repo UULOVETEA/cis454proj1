@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by xcao07 on 2/7/2018.
@@ -41,6 +40,11 @@ public class Activity_Message extends AppCompatActivity {
                         Intent intent3 = new Intent(Activity_Message.this, Activity_Tutors.class);
                         startActivity(intent3);
                         break;
+
+                    case R.id.ic_appointment:
+                        Intent intent4 = new Intent(Activity_Message.this, Activity_Appointment.class);
+                        startActivity(intent4);
+                        break;
                 }
                 return false;
             }
@@ -49,7 +53,7 @@ public class Activity_Message extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.activityMessage);
         title.setText("No messages to display");
         title.setGravity(Gravity.CENTER);
-        title.setTextSize(30);
+        title.setTextSize(25);
     }
 }
 

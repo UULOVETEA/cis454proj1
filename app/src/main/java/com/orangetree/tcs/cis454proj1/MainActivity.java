@@ -1,15 +1,15 @@
 package com.orangetree.tcs.cis454proj1;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,10 +17,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Database dbHelper = new Database(this);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        db.close();
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById((R.id.bottomNavView_Bar));
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.ic_message:
+                        Intent intent1 = new Intent(MainActivity.this, Activity_Message.class);
+                        startActivity(intent1);
+                        break;
+
+                    case R.id.ic_notification:
+                        Intent intent2 = new Intent(MainActivity.this, Activity_Notification.class);
+                        startActivity(intent2);
+                        break;
+
+                    case R.id.ic_tutors:
+                        Intent intent3 = new Intent(MainActivity.this, Activity_Tutors.class);
+                        startActivity(intent3);
+                        break;
+
+                    case R.id.ic_appointment:
+                        Intent intent4 = new Intent(MainActivity.this, Activity_Appointment.class);
+                        startActivity(intent4);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
