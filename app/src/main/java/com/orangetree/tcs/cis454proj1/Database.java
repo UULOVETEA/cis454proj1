@@ -11,8 +11,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Database extends SQLiteOpenHelper {
     private static final String name = "db"; // database name
     private static final int version = 1; // database verison
-    public Database(Context context) {
+    private Database(Context context) {
         super(context, name, null, version);
+    }
+    private static Database instance;
+
+    public static synchronized Database getInstance(Context context){
+        if (instance == null){
+            instance = new Database(context.getApplicationContext());
+        }
+        return instance;
     }
 
     public void createTable(SQLiteDatabase db){
