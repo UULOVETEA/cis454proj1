@@ -3,6 +3,7 @@ package com.orangetree.tcs.cis454proj1;
 /**
  * Created by Qiwu Zou on 2018/2/7.
  */
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String name = "db"; // database name
     private static final int version = 1; // database verison
     private Database(Context context) {
+
         super(context, name, null, version);
     }
     private static Database instance;
@@ -23,20 +25,22 @@ public class Database extends SQLiteOpenHelper {
         return instance;
     }
 
-    public void createTable(SQLiteDatabase db){
-        String execute = "CREATE TABLE INFO(ID INT PRIMARY KEY NOT NULL, NAME TEXT);";
-        db.execSQL(execute);
-    }
 
-    public void insertInfo(SQLiteDatabase db, int ID, String name){
-        String execute = "INSERT INTO INFO (ID, NAME)" +
-                "VALUES (" + ID + ", " + name + " );";
-        db.execSQL(execute);
+    public ContentValues insertIntInfo(String columnName, int value){
+        ContentValues values = new ContentValues();
+        values.put(columnName, value);
+        return values;
+    }
+    public ContentValues insertStringInfo(String columnName, String value){
+        ContentValues values = new ContentValues();
+        values.put(columnName, value);
+        return values;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-
+        String execute = "CREATE TABLE INFO(ID INT KEY NOT NULL, NAME TEXT);";
+        db.execSQL(execute);
     }
 
     @Override
