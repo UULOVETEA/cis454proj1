@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Database extends SQLiteOpenHelper {
     private static final String name = "db"; // database name
-    private static final int version = 1; // database verison
+    private static final int version = 3; // database verison
     private Database(Context context) {
 
         super(context, name, null, version);
@@ -39,13 +39,15 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        String execute = "CREATE TABLE INFO(ID INT KEY NOT NULL, NAME TEXT);";
-        db.execSQL(execute);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        String execute1 = "DROP TABLE ACCOUNT";
+        db.execSQL(execute1);
+        String execute2 = "CREATE TABLE ACCOUNT(ACCOUNTNAME TEXT KEY NOT NULL UNIQUE, PASSWORD TEXT);";
+        db.execSQL(execute2);
     }
 
 

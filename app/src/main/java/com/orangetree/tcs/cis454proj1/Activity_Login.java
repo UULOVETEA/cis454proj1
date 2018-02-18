@@ -1,12 +1,16 @@
 package com.orangetree.tcs.cis454proj1;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.regex.PatternSyntaxException;
 
 public class Activity_Login extends AppCompatActivity {
 
@@ -19,6 +23,17 @@ public class Activity_Login extends AppCompatActivity {
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
         final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
+
+        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+        String message = "";
+        if (helper.insertAccountAndPassword("TEST2", "123456")){
+            message = "ok";
+        }
+        else
+            message = "The account exist, so didn't insert (which is supposed to be)";
+        String password = helper.getPassword("TEST2");
+            TextView text = findViewById(R.id.textView);
+            text.setText("PASSWORD from database: " + password + message);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,8 +61,8 @@ public class Activity_Login extends AppCompatActivity {
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(Activity_Login.this, Activity_Register.class);
-                startActivity(registerIntent);
+                //Intent registerIntent = new Intent(Activity_Login.this, Activity_Register.class);
+                //startActivity(registerIntent);
             }
         });
     }

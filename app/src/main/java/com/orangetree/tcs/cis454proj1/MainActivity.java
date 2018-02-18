@@ -53,26 +53,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Database db = Database.getInstance(getApplicationContext());
-        SQLiteDatabase sqliteDB_W = db.getWritableDatabase();
-        //sqliteDB_W.insert("INFO", null, db.insertIntInfo("ID", 12345688));
-        //sqliteDB_W.close();
-        SQLiteDatabase sqliteDB_R = db.getReadableDatabase();
-        Cursor cursor = sqliteDB_R.query("INFO", null, null, null,null, null, null);
-        try{
-            while (cursor.moveToNext()) {
-                int ID = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
-                TextView text = findViewById(R.id.textView);
-                text.setText("ID from database: " + ID);
-
-            }
-            cursor.close();}
-
-
-        catch (Exception e){
-            System.out.println(e);
-        }
-        sqliteDB_R.close();
 
 
     }
