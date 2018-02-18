@@ -35,6 +35,7 @@ public class Activity_Login extends AppCompatActivity {
             TextView text = findViewById(R.id.textView);
             text.setText("PASSWORD from database: " + password + message);
 
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
