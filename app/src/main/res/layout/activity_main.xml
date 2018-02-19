@@ -6,43 +6,49 @@
     android:layout_height="match_parent"
     tools:context="com.orangetree.tcs.cis454proj1.MainActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/bottomBar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp"
+            android:id="@+id/topBar">
 
-            <LinearLayout
-                android:id="@id/bottomBar"
+            <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true">
+                android:layout_height="wrap_content">
 
-                <android.support.design.widget.BottomNavigationView
-                    android:id="@+id/bottomNavView_Bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:itemIconTint="@android:color/white"
-                    app:itemTextColor="@android:color/white"
-                    app:menu="@menu/bottom_navigation_menu">
+            </android.support.design.widget.AppBarLayout>
 
-                </android.support.design.widget.BottomNavigationView>
+        </RelativeLayout>
 
-            </LinearLayout>
+        <RelativeLayout
+            android:layout_below="@+id/topBar"
+            android:layout_above="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
-        </android.support.v7.widget.Toolbar>
+        </RelativeLayout>
 
-    </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/bottomBar"
+            android:layout_alignParentBottom="true">
 
-    </LinearLayout>
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bottomNavView_Bar"
+                app:menu="@menu/bottom_navigation_menu">
+
+            </android.support.design.widget.BottomNavigationView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
