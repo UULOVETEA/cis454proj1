@@ -21,6 +21,7 @@ public class Activity_Appointment extends AppCompatActivity {
         setContentView(R.layout.activity_appointment);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById((R.id.bottomNavView_Bar));
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

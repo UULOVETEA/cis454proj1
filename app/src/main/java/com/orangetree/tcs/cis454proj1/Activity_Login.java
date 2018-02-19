@@ -22,25 +22,31 @@ public class Activity_Login extends AppCompatActivity {
         final EditText etUserName = (EditText) findViewById(R.id.etUserName);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final Button btnLogin = (Button) findViewById(R.id.btnLogin);
-        final TextView tvRegisterLink = (TextView) findViewById(R.id.tvRegisterLink);
+        final Button btnRegister = (Button) findViewById(R.id.btnRegister);
 
-        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-        String message = "";
-        if (helper.insertAccountAndPassword("TEST2", "123456")){
-            message = "ok";
-        }
-        else
-            message = "The account exist, so didn't insert (which is supposed to be)";
-        String password = helper.getPassword("TEST2");
-            TextView text = findViewById(R.id.textView);
-            text.setText("PASSWORD from database: " + password + message);
+        //Database database = Database.getInstance(getApplicationContext());
 
+        final int counter;
+
+//        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+//            String message = "";
+//        if (helper.insertAccountAndPassword("TEST2", "123456")){
+//            message = "ok";
+//        }
+//        else {
+//            message = "The account exist, so didn't insert (which is supposed to be)";
+//            String password = helper.getPassword("TEST2");
+//            TextView text = findViewById(R.id.textView);
+//            text.setText("PASSWORD from database: " + password + message);
+//        }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int counter = 3;
+                int counter=0;
+
+
                 String name = etUserName.getText().toString();
                 String password = etPassword.getText().toString();
 
@@ -48,22 +54,33 @@ public class Activity_Login extends AppCompatActivity {
                     Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
                     startActivity(loginIntent);
                 } else { // right now, it doesn;t work
-                    counter--;
+                    counter+=1;
 
-                    if (counter == 0) {
+                    if (counter == 3) {
                         btnLogin.setEnabled(false);
                     }
                 }
 
+//                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+//                String message = "";
+//                if (helper.insertAccountAndPassword("TEST2", "123456")) {
+//                    message = "ok";
+//                } else {
+//                    message = "The account exist, so didn't insert (which is supposed to be)";
+//                    String password = helper.getPassword("TEST2");
+//                    TextView text = findViewById(R.id.textView);
+//                    text.setText("PASSWORD from database: " + password + message);
+//
+//                }
             }
         });
 
 
-        tvRegisterLink.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent registerIntent = new Intent(Activity_Login.this, Activity_Register.class);
-                //startActivity(registerIntent);
+                Intent registerIntent = new Intent(Activity_Login.this, Activity_Register.class);
+                startActivity(registerIntent);
             }
         });
     }
