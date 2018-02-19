@@ -21,22 +21,38 @@
 
         </android.support.design.widget.AppBarLayout>
 
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@+id/topBar"
-            android:layout_above="@+id/bottomBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/topBar"
+            android:layout_marginStart="28dp">
 
             <TextView
+                android:id="@+id/activityAppointment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
-                android:textSize="30sp"
-                android:id="@+id/activityAppointment"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Confirm" />
 
         </RelativeLayout>
 

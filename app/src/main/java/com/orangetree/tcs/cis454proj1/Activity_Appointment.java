@@ -8,7 +8,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xcao07 on 2/7/2018.
@@ -56,6 +62,14 @@ public class Activity_Appointment extends AppCompatActivity {
         title.setText("No appointment to display");
         title.setGravity(Gravity.CENTER);
         title.setTextSize(25);
+
+        Spinner appointments_Spinner = (Spinner) findViewById(R.id.spinner);
+        List<String> list = new ArrayList<String>();
+        list.add("TEST_APP1");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list);
+        appointments_Spinner.setAdapter(dataAdapter);
+        Button confirm_Button = (Button) findViewById(R.id.confirm_button);
+
     }
 }
 
