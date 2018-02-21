@@ -51,6 +51,9 @@ public class DatabaseHelper {
     }
 
     public boolean databaseContains(String ID){
+        if (ID == null){
+            return false;
+        }
         Cursor cursor = DB_forRead.query("ACCOUNT", new String[] {"ACCOUNTNAME"}, "ACCOUNTNAME = ?", new String[] {ID},null, null, null);
         if (cursor.getCount() == 0){
             return false;

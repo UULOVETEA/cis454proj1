@@ -37,13 +37,14 @@ public class Activity_Login extends AppCompatActivity {
 
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-                Boolean checkUserName = helper.databaseContains(name);
-                String checkPassword = helper.getPassword(name);
+
 
                 name = etUserName.getText().toString();
                 password = etPassword.getText().toString();
 
                 if (validateEmpty()) {
+                    Boolean checkUserName = helper.databaseContains(name);
+                    String checkPassword = helper.getPassword(name);
                     if ((helper.databaseContains(name)) && (checkPassword.equals(password))) {
                         Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
                         startActivity(loginIntent);
