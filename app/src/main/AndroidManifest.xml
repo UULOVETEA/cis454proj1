@@ -9,19 +9,26 @@
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity_Login" android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity
+            android:name=".Activity_Splash"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity_Login"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
         <activity android:name=".Activity_Appointment" />
         <activity android:name=".Activity_Message" />
         <activity android:name=".Activity_Notification" />
         <activity android:name=".Activity_Tutors" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activity_Register"> </activity>
+        <activity android:name=".Activity_Register">
 
     </application>
 
