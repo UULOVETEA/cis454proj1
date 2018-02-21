@@ -9,69 +9,48 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.regex.PatternSyntaxException;
 
 public class Activity_Login extends AppCompatActivity {
+
+    private String name, password, message;
+    private EditText etUserName, etPassword;
+    private Button btnLogin, btnRegister;
+    private TextView tvMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText etUserName = (EditText) findViewById(R.id.etUserName);
-        final EditText etPassword = (EditText) findViewById(R.id.etPassword);
-        final Button btnLogin = (Button) findViewById(R.id.btnLogin);
-        final Button btnRegister = (Button) findViewById(R.id.btnRegister);
-
-        //Database database = Database.getInstance(getApplicationContext());
-
-        final int counter;
-
-//        DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-//            String message = "";
-//        if (helper.insertAccountAndPassword("TEST2", "123456")){
-//            message = "ok";
-//        }
-//        else {
-//            message = "The account exist, so didn't insert (which is supposed to be)";
-//            String password = helper.getPassword("TEST2");
-//            TextView text = findViewById(R.id.textView);
-//            text.setText("PASSWORD from database: " + password + message);
-//        }
+        etUserName = (EditText) findViewById(R.id.etUserName);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        tvMessage = (TextView) findViewById(R.id.tvMessage);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int counter=0;
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
+                Boolean checkUserName = helper.databaseContains(name);
+                String checkPassword = helper.getPassword(name);
 
-                String name = etUserName.getText().toString();
-                String password = etPassword.getText().toString();
+                name = etUserName.getText().toString();
+                password = etPassword.getText().toString();
 
-                if (name.equals("admin") && password.equals("password")) {
-                    Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
-                    startActivity(loginIntent);
-                } else { // right now, it doesn;t work
-                    counter+=1;
-
-                    if (counter == 3) {
-                        btnLogin.setEnabled(false);
+                if (validateEmpty()) {
+                    if ((helper.databaseContains(name)) && (checkPassword.equals(password))) {
+                        Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
+                        startActivity(loginIntent);
+                    } else {
+                        tvMessage.setText("Your username or password were entered incorrectly");
                     }
                 }
-
-//                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-//                String message = "";
-//                if (helper.insertAccountAndPassword("TEST2", "123456")) {
-//                    message = "ok";
-//                } else {
-//                    message = "The account exist, so didn't insert (which is supposed to be)";
-//                    String password = helper.getPassword("TEST2");
-//                    TextView text = findViewById(R.id.textView);
-//                    text.setText("PASSWORD from database: " + password + message);
-//
-//                }
             }
         });
 
@@ -83,5 +62,21 @@ public class Activity_Login extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
+    }
+
+    public boolean validateEmpty() {
+
+        boolean valid = true;
+
+        if (name.isEmpty()) {
+            etUserName.setError("Please enter a valid username");
+            valid = false;
+        }
+        if (password.isEmpty()) {
+            etPassword.setError("Please enter a password");
+            valid = false;
+        }
+
+        return valid;
     }
 }

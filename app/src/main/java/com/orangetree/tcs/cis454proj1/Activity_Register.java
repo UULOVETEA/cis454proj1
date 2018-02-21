@@ -1,5 +1,6 @@
 package com.orangetree.tcs.cis454proj1;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ public class Activity_Register extends AppCompatActivity {
 
     private String name, email, password;
     private EditText etUserName, etEmail, etPassword;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,24 +28,36 @@ public class Activity_Register extends AppCompatActivity {
         etUserName = (EditText) findViewById(R.id.etUserName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        textView = (TextView) findViewById(R.id.textView);
+
         final Button btnRegister = (Button) findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String name1 = etUserName.getText().toString();
-                String email1 = etEmail.getText().toString();
-                String password1 = etPassword.getText().toString();
-                //register();
-                if (!validateEmail(email1)) {
-                    etEmail.setError("Invalid Email");
-                    etEmail.requestFocus();
+                intialize();
+
+                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
+
+                if (validateEmpty()) {
+                    if (helper.insertAccountAndPassword(name, password)) {
+                        Intent backLogin = new Intent(Activity_Register.this, Activity_Login.class);
+                        startActivity(backLogin);
+                    } else {
+                        textView.setText("It looks like you're already a member");
+                    }
                 }
-                if (!validatePassword(password1)) {
-                    etPassword.setError("Invalid Password");
-                    etPassword.requestFocus();
-                }
+
+
+//                if (!validateEmail(email1)) {
+//                    etEmail.setError("Invalid Email");
+//                    etEmail.requestFocus();
+//                }
+//                if (!validatePassword(password1)) {
+//                    etPassword.setError("Invalid Password");
+//                    etPassword.requestFocus();
+//                }
 //                Database database = Database.getInstance(getApplicationContext());
 //                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 //                String message = "";
@@ -62,33 +77,19 @@ public class Activity_Register extends AppCompatActivity {
         });
     }
 
-    public void register() {
-        intialize();
-        if (!validate()) {
-            Toast.makeText(this, "SignUp has Failed", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            onSignupSccess();
-        }
-    }
-
-    public void onSignupSccess() {
-
-    }
-
-    public boolean validate() {
+    public boolean validateEmpty() {
         boolean valid = true;
 
         if (name.isEmpty()) {
-            etUserName.setError("Please enter user name");
+            etUserName.setError("Please enter a username");
             valid = false;
         }
         if (email.isEmpty()) {
-            etEmail.setError("Please enter email");
+            etEmail.setError("Please enter a email");
             valid = false;
         }
         if (password.isEmpty()) {
-            etPassword.setError("Please enter password");
+            etPassword.setError("Please enter a password");
             valid = false;
         }
 
@@ -96,9 +97,9 @@ public class Activity_Register extends AppCompatActivity {
     }
 
     public void intialize() {
-        name = etUserName.getText().toString().trim();
-        email = etEmail.getText().toString().trim();
-        password = etPassword.getText().toString().trim();
+        name = etUserName.getText().toString();
+        email = etEmail.getText().toString();
+        password = etPassword.getText().toString();
     }
 
     protected boolean validateEmail(String email) {
