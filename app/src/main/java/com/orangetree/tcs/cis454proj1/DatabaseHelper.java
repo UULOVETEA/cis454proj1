@@ -39,26 +39,32 @@ public class DatabaseHelper {
         }
     }
 
+
     public String getPassword(String ID){
-        Cursor cursor = DB_forRead.query("ACCOUNT", new String[] {"ACCOUNTNAME, PASSWORD"}, "ACCOUNTNAME = ?", new String[] {ID},null, null, null);
 
-        cursor.moveToNext();
-        return cursor.getString(cursor.getColumnIndexOrThrow("PASSWORD"));
+        String password = "ACCOUNT DOES NOT EXIST";
 
+        if (ID != null && databaseContains(ID)) {
+            Cursor cursor = DB_forRead.query("ACCOUNT", new String[] {"ACCOUNTNAME, PASSWORD"}, "ACCOUNTNAME = ?", new String[] {ID},null, null, null);
 
+            cursor.moveToNext();
+            password = cursor.getString(cursor.getColumnIndexOrThrow("PASSWORD"));
+        }
 
-
+        return password;
     }
 
-    public boolean databaseContains(String ID){
-        if (ID == null){
-            return false;
+    public boolean databaseContains(String ID) {
+
+        Boolean flag = true;
+
+        if (ID != null) {
+            Cursor cursor = DB_forRead.query("ACCOUNT", new String[]{"ACCOUNTNAME"}, "ACCOUNTNAME = ?", new String[]{ID}, null, null, null);
+            if (cursor.getCount() == 0) {
+                flag = false;
+            }
+
         }
-        Cursor cursor = DB_forRead.query("ACCOUNT", new String[] {"ACCOUNTNAME"}, "ACCOUNTNAME = ?", new String[] {ID},null, null, null);
-        if (cursor.getCount() == 0){
-            return false;
-        }
-        else
-            return true;
+        return flag;
     }
 }

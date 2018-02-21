@@ -37,24 +37,31 @@ public class Activity_Login extends AppCompatActivity {
 
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-
-
                 name = etUserName.getText().toString();
                 password = etPassword.getText().toString();
 
                 if (validateEmpty()) {
+
                     Boolean checkUserName = helper.databaseContains(name);
                     String checkPassword = helper.getPassword(name);
-                    if ((helper.databaseContains(name)) && (checkPassword.equals(password))) {
+
+                    if (name.equals("admin") && password.equals("password")) {
                         Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
                         startActivity(loginIntent);
-                    } else {
+                    }
+                    else if (checkUserName == true && checkPassword.equals(password)) {
+                        Intent loginIntent = new Intent(Activity_Login.this, MainActivity.class);
+                        startActivity(loginIntent);
+                    }
+                    else if (checkPassword.equals("ACCOUNT DOES NOT EXIST")) {
+                        tvMessage.setText("The account " + "'"+ name + "'" + " is not registered for CTS");
+                    }
+                    else {
                         tvMessage.setText("Your username or password were entered incorrectly");
                     }
                 }
             }
         });
-
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -48,31 +48,6 @@ public class Activity_Register extends AppCompatActivity {
                         textView.setText("It looks like you're already a member");
                     }
                 }
-
-
-//                if (!validateEmail(email1)) {
-//                    etEmail.setError("Invalid Email");
-//                    etEmail.requestFocus();
-//                }
-//                if (!validatePassword(password1)) {
-//                    etPassword.setError("Invalid Password");
-//                    etPassword.requestFocus();
-//                }
-//                Database database = Database.getInstance(getApplicationContext());
-//                DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-//                String message = "";
-//                if (helper.insertAccountAndPassword(name1, password1)) {
-//                    message = "Ok, Register successfully";
-//                } else {
-//                    message = "The account exist, so didn't insert (which is supposed to be)";
-//                    //String password = helper.getPassword("TEST2");
-//                    TextView text = findViewById(R.id.textView);
-//                    text.setText("PASSWORD from database: " + password1 + message);
-//
-//                }
-
-                //Toast.makeText(getApplicationContext(), "Register successfully", Toast.LENGTH_LONG).show();
-
             }
         });
     }
