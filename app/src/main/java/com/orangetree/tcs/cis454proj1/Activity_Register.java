@@ -1,15 +1,12 @@
 package com.orangetree.tcs.cis454proj1;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +15,7 @@ public class Activity_Register extends AppCompatActivity {
 
     private String name, email, password;
     private EditText etUserName, etEmail, etPassword;
+    btnRegister = (Button) findViewById(R.id.btnRegister);
     private TextView textView;
 
     @Override
@@ -28,9 +26,8 @@ public class Activity_Register extends AppCompatActivity {
         etUserName = (EditText) findViewById(R.id.etUserName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
         textView = (TextView) findViewById(R.id.textView);
-
-        final Button btnRegister = (Button) findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,15 +56,14 @@ public class Activity_Register extends AppCompatActivity {
             etUserName.setError("Please enter a username");
             valid = false;
         }
-        if (email.isEmpty()) {
-            etEmail.setError("Please enter a email");
+        if (!validateEmail(email)) {
+            etEmail.setError("Please enter a valid email");
             valid = false;
         }
-        if (password.isEmpty()) {
-            etPassword.setError("Please enter a password");
+        if (!validatePassword(password)) {
+            etPassword.setError("Password must be at least 6 characters");
             valid = false;
         }
-
         return  valid;
     }
 
@@ -95,5 +91,3 @@ public class Activity_Register extends AppCompatActivity {
         }
     }
 }
-
-
