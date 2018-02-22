@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class Activity_Welcome extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 2000;
     private String name, message;
     private TextView tvWelcome;
 
