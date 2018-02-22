@@ -26,6 +26,21 @@ public class Activity_Login extends AppCompatActivity {
         btnRegister = (Button) findViewById(R.id.btnRegister);
         tvMessage = (TextView) findViewById(R.id.tvMessage);
 
+        /*
+        String boo;
+        DatabaseHelper db_h = new DatabaseHelper(getApplicationContext());
+        if(db_h.insertPhoneAndEmail("zouqiwu", "123456", "dfs@126.com")){
+            boo = "True";
+        }
+        else {
+            boo = "False";
+        }
+        String test_output = db_h.getPhone("zouqiwu");
+        tvMessage.setText(test_output + boo);
+
+
+
+        */
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

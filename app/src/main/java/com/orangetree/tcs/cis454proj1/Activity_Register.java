@@ -15,14 +15,15 @@ public class Activity_Register extends AppCompatActivity {
 
     private String name, email, password;
     private EditText etUserName, etEmail, etPassword;
-    btnRegister = (Button) findViewById(R.id.btnRegister);
+    private Button tnRegister, btnRegister;
+
     private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        Button tnRegister = (Button) findViewById(R.id.btnRegister);
         etUserName = (EditText) findViewById(R.id.etUserName);
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
