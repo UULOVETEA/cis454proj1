@@ -38,7 +38,7 @@ public class DatabaseHelper {
             return false;
         }
     }
-    public boolean insertPhoneAndEmail (String ID, String phone, String email){
+    public boolean updatePhoneAndEmail (String ID, String phone, String email){
         if (databaseContains(ID)) {
             ContentValues inputContent;
             inputContent = db.insertStringInfo("PHONE", phone);
@@ -63,6 +63,20 @@ public class DatabaseHelper {
         }
 
         return phone;
+    }
+
+    public String geteEmail(String ID){
+
+        String email = "ACCOUNT DOES NOT EXIST";
+
+        if (ID != null && databaseContains(ID)) {
+            Cursor cursor = DB_forRead.query("ACCOUNT", new String[] {"ACCOUNTNAME, EMAIL"}, "ACCOUNTNAME = ?", new String[] {ID},null, null, null);
+            int counter = cursor.getCount();
+            cursor.moveToNext();
+            email = cursor.getString(cursor.getColumnIndexOrThrow("EMAIL"));
+        }
+
+        return email;
     }
 
     public String getPassword(String ID){
