@@ -28,12 +28,16 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:noHistory="true">
         </activity>
+        <activity
+            android:name=".Activity_Register"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:noHistory="true">
+        </activity>
         <activity android:name=".Activity_Appointment" />
         <activity android:name=".Activity_Message" />
         <activity android:name=".Activity_Notification" />
         <activity android:name=".Activity_Tutors" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activity_Register"/>
 
     </application>
 
