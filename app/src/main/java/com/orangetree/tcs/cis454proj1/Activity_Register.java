@@ -13,22 +13,21 @@ import java.util.regex.Pattern;
 
 public class Activity_Register extends AppCompatActivity {
 
-    private String name, email, password;
-    private EditText etUserName, etEmail, etPassword;
-    private Button tnRegister, btnRegister;
-
-    private TextView textView;
+    private String name, password, checkPassowrd, email, phone;
+    private EditText etUserName, etPassword,etConfirmPassword, etEmail, etPhone;
+    private Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Button tnRegister = (Button) findViewById(R.id.btnRegister);
+
         etUserName = (EditText) findViewById(R.id.etUserName);
-        etEmail = (EditText) findViewById(R.id.etEmail);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etConfirmPassword = (EditText) findViewById(R.id.etConfirmPassword);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPhone = (EditText) findViewById(R.id.etPhone);
         btnRegister = (Button) findViewById(R.id.btnRegister);
-        textView = (TextView) findViewById(R.id.textView);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,43 +37,66 @@ public class Activity_Register extends AppCompatActivity {
 
                 DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
 
-                if (validateEmpty()) {
+                if (validation()) {
                     if (helper.insertAccountAndPassword(name, password)) {
+                        helper.updatePhoneAndEmail(name, phone, email);
                         Intent backLogin = new Intent(Activity_Register.this, Activity_Login.class);
                         startActivity(backLogin);
                     } else {
-                        textView.setText("It looks like you're already a member");
+                        etUserName.setError("It looks like you're already a member");
+                        etUserName.requestFocus();
                     }
                 }
             }
         });
     }
 
-    public boolean validateEmpty() {
+    public boolean validation() {
         boolean valid = true;
 
         if (name.isEmpty()) {
             etUserName.setError("Please enter a username");
             valid = false;
         }
+        if (!validatePassword(password)) {
+            etPassword.setError("Password must be at least 6 characters");
+            valid = false;
+        }
+        if (checkPassowrd.isEmpty()) {
+            etConfirmPassword.setError("Please enter your password again");
+            valid = false;
+        }
+        if (!checkPassowrd.equals(password)) {
+            etConfirmPassword.setError("Passwords does not match");
+            valid = false;
+        }
         if (!validateEmail(email)) {
             etEmail.setError("Please enter a valid email");
             valid = false;
         }
-        if (!validatePassword(password)) {
-            etPassword.setError("Password must be at least 6 characters");
-            valid = false;
+        if (!validatePhone(phone) || phone.length() != 10) {
+            etPhone.setError("Please enter a valid phone number");
         }
         return  valid;
     }
 
     public void intialize() {
         name = etUserName.getText().toString();
-        email = etEmail.getText().toString();
         password = etPassword.getText().toString();
+        checkPassowrd = etConfirmPassword.getText().toString();
+        email = etEmail.getText().toString();
+        phone = etPhone.getText().toString();
     }
 
-    protected boolean validateEmail(String email) {
+    public boolean validatePassword(String password) {
+        if (password!=null && password.length()>5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validateEmail(String email) {
         String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
@@ -84,11 +106,12 @@ public class Activity_Register extends AppCompatActivity {
         return matcher.matches();
     }
 
-    protected boolean validatePassword(String password) {
-        if (password!=null && password.length()>6) {
-            return true;
-        } else {
-            return false;
-        }
+    public boolean validatePhone(String phone) {
+        String phonePattern = "\\d*\\.?\\d+";
+
+        Pattern pattern = Pattern.compile(phonePattern);
+        Matcher matcher = pattern.matcher(phone);
+
+        return matcher.matches();
     }
 }
