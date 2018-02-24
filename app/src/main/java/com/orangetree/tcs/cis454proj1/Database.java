@@ -41,6 +41,8 @@ public class Database extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         String execute2 = "CREATE TABLE ACCOUNT (ACCOUNTNAME TEXT KEY NOT NULL UNIQUE, PASSWORD TEXT);";
         db.execSQL(execute2);
+        String execute = "CREATE TABLE APPOINTMENT ("
+
     }
 
     @Override

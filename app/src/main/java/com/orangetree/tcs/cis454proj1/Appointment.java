@@ -20,6 +20,9 @@ public class Appointment {
     public AdminAcct adminAccount;
     public StudentAcct studentAccount;
     public TutorAcct tutorAccount;
+    public String ID;
+    public int session;
+    public int offset;
 
     public Calendar date = Calendar.getInstance();
     /**
@@ -27,12 +30,9 @@ public class Appointment {
      *  student, admin and tutor, and the start time and duration.
       */
 
-    Appointment(int year, int month, int day, int hour, int minute, int second, StudentAcct student, AdminAcct admin, TutorAcct tutor, int dur_time){
-        date.set(year,month,day,hour,minute,second);
-        studentAccount = student;
-        adminAccount = admin;
-        tutorAccount = tutor;
-        duration = dur_time;
-
+    Appointment(String input_ID, int input_session, int input_offset){
+        ID = input_ID;
+        session = input_session;
+        offset = input_offset;
     }
 }
