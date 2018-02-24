@@ -42,7 +42,7 @@ public class Database extends SQLiteOpenHelper {
         String execute2 = "CREATE TABLE ACCOUNT (ACCOUNTNAME TEXT KEY NOT NULL UNIQUE, PASSWORD TEXT, " +
                 "PHONE TEXT, EMAIL TEXT);";
         db.execSQL(execute2);
-        String execute = "CREATE TABLE APPOINTMENT ("
+
 
     }
 
