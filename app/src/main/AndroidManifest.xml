@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity_Splash"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +22,22 @@
         <activity
             android:name=".Activity_Login"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-
+        </activity>
+        <activity
+            android:name=".Activity_Welcome"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:noHistory="true">
+        </activity>
+        <activity
+            android:name=".Activity_Register"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:noHistory="true">
         </activity>
         <activity android:name=".Activity_Appointment" />
         <activity android:name=".Activity_Message" />
         <activity android:name=".Activity_Notification" />
         <activity android:name=".Activity_Tutors" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Activity_Register"/>
 
     </application>
 
