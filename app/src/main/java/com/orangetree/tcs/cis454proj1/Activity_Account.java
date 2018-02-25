@@ -95,6 +95,7 @@ public class Activity_Account extends AppCompatActivity {
                 intialize();
 
                 if (validation()) {
+                    helper.updatePassword(name, password);
                     helper.updatePhoneAndEmail(name, phone, email);
 
                     DatabaseHelper getInfo = new DatabaseHelper(getApplicationContext());

@@ -141,7 +141,6 @@ public class Activity_Appointment extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     public void updateAdapter(List l){
