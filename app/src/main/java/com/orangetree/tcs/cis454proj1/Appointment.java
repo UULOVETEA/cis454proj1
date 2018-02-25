@@ -20,7 +20,7 @@ public class Appointment {
     public AdminAcct adminAccount;
     public StudentAcct studentAccount;
     public TutorAcct tutorAccount;
-    public String ID;
+    public int ID;
     public int session;
     public int offset;
 
@@ -30,7 +30,7 @@ public class Appointment {
      *  student, admin and tutor, and the start time and duration.
       */
 
-    Appointment(String input_ID, int input_session, int input_offset){
+    Appointment(int input_ID, int input_session, int input_offset){
         ID = input_ID;
         session = input_session;
         offset = input_offset;
