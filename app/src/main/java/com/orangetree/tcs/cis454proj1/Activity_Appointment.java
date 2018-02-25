@@ -28,18 +28,19 @@ import java.util.Locale;
  */
 
 public class Activity_Appointment extends AppCompatActivity {
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
     private String username;
 
-=======
+//=======
+    TextView text5;
     long index;
     SystemCalendar system;
     List<String> list;
     DatabaseHelper db_h;
     Spinner appointments_Spinner;
     ArrayAdapter<String> dataAdapter;
->>>>>>> 168e2cd876ee49f74339b63ca9ab88979f54f741
+//>>>>>>> 168e2cd876ee49f74339b63ca9ab88979f54f741
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,31 +112,45 @@ public class Activity_Appointment extends AppCompatActivity {
         dataAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list);
         appointments_Spinner.setAdapter(dataAdapter);
         Button confirm_Button = (Button) findViewById(R.id.confirm_button);
-        index = appointments_Spinner.getSelectedItemPosition();
+        text5 = (TextView)findViewById(R.id.textView5);
+        text5.setText(db_h.getAppWithAccount(Activity_Account.getUsername()));
         confirm_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                index = appointments_Spinner.getSelectedItemPosition();
                 switch ((int)index){
                     case 0:
-                        system.makeAppointment(db_h,1, 0);
+                        system.makeAppointment(Activity_Account.getUsername(), db_h,1, 0);
                         list = system.getAppointments(db_h);
                         updateAdapter(list);
+                        updateText();
                         break;
 
                     case 1:
-                        system.makeAppointment(db_h, 1, 1);
+                        String name = Constant.getInstance().name;
+                        system.makeAppointment(name, db_h, 1, 1);
+                        list = system.getAppointments(db_h);
+                        updateAdapter(list);
                         break;
                     case 2:
-                        system.makeAppointment(db_h, 2, 0);
+                        system.makeAppointment(Activity_Account.getUsername(), db_h, 2, 0);
+                        list = system.getAppointments(db_h);
+                        updateAdapter(list);
                         break;
                     case 3:
-                        system.makeAppointment(db_h, 2, 1);
+                        system.makeAppointment(Activity_Account.getUsername(), db_h, 2, 1);
+                        list = system.getAppointments(db_h);
+                        updateAdapter(list);
                         break;
                     case 4:
-                        system.makeAppointment(db_h, 3, 0);
+                        system.makeAppointment(Activity_Account.getUsername(), db_h, 3, 0);
+                        list = system.getAppointments(db_h);
+                        updateAdapter(list);
                         break;
                     case 5:
-                        system.makeAppointment(db_h, 3, 1);
+                        system.makeAppointment(Activity_Account.getUsername(), db_h, 3, 1);
+                        list = system.getAppointments(db_h);
+                        updateAdapter(list);
                         break;
 
                 }
@@ -149,5 +164,9 @@ public class Activity_Appointment extends AppCompatActivity {
         dataAdapter.notifyDataSetChanged();
         appointments_Spinner.setAdapter(dataAdapter);
 
+    }
+
+    public void updateText(){
+        text5.setText(db_h.getAppWithAccount(Activity_Account.getUsername()));
     }
 }

@@ -48,6 +48,8 @@ public class Activity_Login extends AppCompatActivity {
 
                 name = etUserName.getText().toString();
                 password = etPassword.getText().toString();
+                Constant.getInstance().name = name;
+                String temp = Constant.getInstance().name;
 
                 if (validateEmpty()) {
                     Boolean checkUserName = helper.databaseContains(name);

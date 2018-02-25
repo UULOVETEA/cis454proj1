@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 public class Activity_Account extends AppCompatActivity {
 
-    private String name, password, email, phone;
+    private static String name, password, email, phone;
     private TextView tvUserName;
     private EditText etPassword, etEmail, etPhone;
     private Button btnUpdate, btnLogout;
@@ -40,7 +40,7 @@ public class Activity_Account extends AppCompatActivity {
 
         DatabaseHelper getInfo = new DatabaseHelper(getApplicationContext());
         etPassword.setText(getInfo.getPassword(name));
-        etEmail.setText(getInfo.geteEmail(name));
+        etEmail.setText(getInfo.getEmail(name));
         etPhone.setText(getInfo.getPhone(name));
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById((R.id.bottomNavView_Bar));
@@ -100,7 +100,7 @@ public class Activity_Account extends AppCompatActivity {
 
                     DatabaseHelper getInfo = new DatabaseHelper(getApplicationContext());
                     etPassword.setText(getInfo.getPassword(name));
-                    etEmail.setText(getInfo.geteEmail(name));
+                    etEmail.setText(getInfo.getEmail(name));
                     etPhone.setText(getInfo.getPhone(name));
                 }
             }
@@ -164,5 +164,9 @@ public class Activity_Account extends AppCompatActivity {
         Matcher matcher = pattern.matcher(phone);
 
         return matcher.matches();
+    }
+
+    public static String getUsername(){
+        return name;
     }
 }

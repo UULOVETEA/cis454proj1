@@ -36,7 +36,7 @@ public class SystemCalendar {
     }
 
     public List<String> getAppointments(DatabaseHelper db_h){
-        if (appList.size() == 0) {
+        if (db_h.getAppNum() == 0) {
             Calendar Calendar_temp = Calendar.getInstance();
             Date date_temp;
             String dateTimeString;
@@ -52,7 +52,7 @@ public class SystemCalendar {
                 } else {
                     dateTimeString = dateTimeString + "   2:00 PM";
                 }
-                int id = db_h.insertAppointment();
+                int id = db_h.insertAppointment(i/2+1, i % 2 == 0 ? 0 : 1);
                 Appointment appoint = new Appointment(id, i / 2 + 1, i % 2 == 0 ? 0 : 1);
                 appList.add(appoint);
                 temp.add(dateTimeString);
@@ -61,35 +61,16 @@ public class SystemCalendar {
         }
         else{
             List<String> temp = new ArrayList<>();
-            for (Appointment app : appList){
-                int avail = db_h.getAvailability(Integer.toString(app.ID));
-                if (avail == 1){
-                    Calendar Calendar_temp = Calendar.getInstance();
-                    Calendar_temp.add(Calendar.DATE, +app.session);
-                    Date date_temp = Calendar_temp.getTime();
-                    String dateTimeString = new SimpleDateFormat("MM/dd").format(date_temp);
-                    if (app.offset == 0){
-                        dateTimeString = dateTimeString + "   9:00 AM";
-                    }
-                    else {
-                        dateTimeString = dateTimeString + "   2:00 PM";
-                    }
-                    temp.add(dateTimeString);
-
-                }
-            }
+            temp = db_h.getAllApp();
             return temp;
         }
 
     }
 
-    public void makeAppointment(DatabaseHelper db_h, int session, int offset){
-        for (Appointment app : appList){
-            if (app.session == session && app.offset == offset){
-                db_h.updateAppintment(app.ID, 0);
-                break;
-            }
-        }
+    public void makeAppointment(String name, DatabaseHelper db_h, int session, int offset){
+        int rowid = db_h.updateAppintment(session, offset, 0);
+        db_h.bindAccountWithApp(name, rowid);
+
     }
     /**
      * Add an appointment to the Calendar
