@@ -22,10 +22,16 @@ import java.util.List;
  */
 
 public class Activity_Appointment extends AppCompatActivity {
+
+    private String username;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById((R.id.bottomNavView_Bar));
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -37,25 +43,35 @@ public class Activity_Appointment extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-
                     case R.id.ic_message:
+                        item.setCheckable(true);
                         Intent intent1 = new Intent(Activity_Appointment.this, Activity_Message.class);
+                        intent1.putExtra("username", username);
                         startActivity(intent1);
                         break;
 
                     case R.id.ic_notification:
                         Intent intent2 = new Intent(Activity_Appointment.this, Activity_Notification.class);
+                        intent2.putExtra("username", username);
                         startActivity(intent2);
                         break;
 
                     case R.id.ic_tutors:
                         Intent intent3 = new Intent(Activity_Appointment.this, Activity_Tutors.class);
+                        intent3.putExtra("username", username);
                         startActivity(intent3);
                         break;
 
                     case R.id.ic_appointment:
                         Intent intent4 = new Intent(Activity_Appointment.this, Activity_Appointment.class);
+                        intent4.putExtra("username", username);
                         startActivity(intent4);
+                        break;
+
+                    case R.id.ic_myaccount:
+                        Intent intent5 = new Intent(Activity_Appointment.this, Activity_Account.class);
+                        intent5.putExtra("username", username);
+                        startActivity(intent5);
                         break;
                 }
                 return false;

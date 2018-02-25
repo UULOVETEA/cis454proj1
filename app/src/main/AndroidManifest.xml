@@ -11,8 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity_Splash"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,24 +21,21 @@
         </activity>
         <activity
             android:name=".Activity_Login"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity_Welcome"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:noHistory="true">
-        </activity>
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activity_Register"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:noHistory="true">
-        </activity>
-        <activity android:name=".Activity_Appointment" />
-        <activity android:name=".Activity_Message" />
-        <activity android:name=".Activity_Notification" />
-        <activity android:name=".Activity_Tutors" />
-        <activity android:name=".MainActivity" />
-
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Activity_Appointment" android:noHistory="true" />
+        <activity android:name=".Activity_Message" android:noHistory="true" />
+        <activity android:name=".Activity_Notification" android:noHistory="true" />
+        <activity android:name=".Activity_Tutors" android:noHistory="true" />
+        <activity android:name=".Activity_Account" android:noHistory="true" />
     </application>
 
 </manifest>

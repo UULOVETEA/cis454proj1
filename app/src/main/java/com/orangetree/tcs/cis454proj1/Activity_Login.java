@@ -54,6 +54,8 @@ public class Activity_Login extends AppCompatActivity {
                     String checkPassword = helper.getPassword(name);
 
                     if (name.equals("admin") && password.equals("password")) {
+                        helper.insertAccountAndPassword("admin", "password");
+                        helper.updatePhoneAndEmail("admin", "4544548888", "CIS454-group8@syr.edu");
                         Intent loginIntent = new Intent(Activity_Login.this, Activity_Welcome.class);
                         loginIntent.putExtra("username", name);
                         startActivity(loginIntent);

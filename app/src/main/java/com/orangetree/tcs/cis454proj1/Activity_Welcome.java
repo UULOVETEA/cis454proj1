@@ -29,6 +29,7 @@ public class Activity_Welcome extends AppCompatActivity {
             @Override
             public void run() {
                 Intent loginIntent = new Intent(Activity_Welcome.this, MainActivity.class);
+                loginIntent.putExtra("username", name);
                 startActivity(loginIntent);
             }
         },SPLASH_TIME_OUT);
