@@ -31,11 +31,11 @@
             android:noHistory="true"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".MainActivity"/>
-        <activity android:name=".Activity_Appointment" android:noHistory="true" />
-        <activity android:name=".Activity_Message" android:noHistory="true" />
-        <activity android:name=".Activity_Notification" android:noHistory="true" />
-        <activity android:name=".Activity_Tutors" android:noHistory="true" />
-        <activity android:name=".Activity_Account" android:noHistory="true" />
+        <activity android:name=".Activity_Appointment" android:noHistory="true" android:label="Appointment"/>
+        <activity android:name=".Activity_Message" android:noHistory="true"  android:label="Message" />
+        <activity android:name=".Activity_Notification" android:noHistory="true"  android:label="Notification" />
+        <activity android:name=".Activity_Tutors" android:noHistory="true"  android:label="Tutors" />
+        <activity android:name=".Activity_Account" android:noHistory="true"  android:label="My Account" />
     </application>
 
 </manifest>
