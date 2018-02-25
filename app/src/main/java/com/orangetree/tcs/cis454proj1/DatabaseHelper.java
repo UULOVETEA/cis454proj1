@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.orangetree.tcs.cis454proj1.Database;
 import com.orangetree.tcs.cis454proj1.R;
 
+import static android.os.Build.ID;
+
 /**
  * Created by Qiwu Zou on 2018/2/17.
  */
@@ -49,6 +51,35 @@ public class DatabaseHelper {
         else{
             return false;
         }
+    }
+
+    public int insertAppointment (){
+            ContentValues inputContent;
+            inputContent = db.insertIntInfo("AVAILABILITY", 1);
+            DB_forWrite.insert("APPOINTMENT", null, inputContent);
+            Cursor cursor = DB_forRead.rawQuery("SELECT last_insert_rowid();",new String[]{});
+            cursor.moveToNext();
+            int rowid = cursor.getInt(cursor.getColumnIndexOrThrow("last_insert_rowid()"));
+            return rowid;
+
+    }
+
+    public boolean updatePassword(String ID, String password){
+        if (databaseContains(ID)) {
+            ContentValues inputContent;
+            inputContent = db.insertStringInfo("PASSWORD", password);
+            DB_forWrite.update("ACCOUNT", inputContent,"ACCOUNTNAME = ?", new String[]{ID});
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void updateAppintment(int ID, int availability){
+        ContentValues inputContent;
+        inputContent = db.insertIntInfo("AVAILABILITY", availability);
+        DB_forWrite.execSQL("UPDATE APPOINTMENT SET AVAILABILITY = " + availability + " WHERE rowid = " + ID + ";");
     }
 
     public String getPhone(String ID){
@@ -93,6 +124,12 @@ public class DatabaseHelper {
         return password;
     }
 
+    public int getAvailability(String ID){
+        Cursor cursor = DB_forRead.query("APPOINTMENT", new String[] {"rowid, AVAILABILITY"}, "rowid = ?", new String[] {ID},null, null, null);
+        cursor.moveToNext();
+        int temp = cursor.getInt(cursor.getColumnIndexOrThrow("AVAILABILITY"));
+        return temp;
+    }
     public boolean databaseContains(String ID) {
 
         Boolean flag = true;
