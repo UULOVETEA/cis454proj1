@@ -94,14 +94,14 @@ public class DatabaseHelper {
         ContentValues inputContent;
         inputContent = db.insertIntInfo("AVAILABILITY", availability);
         DB_forWrite.execSQL("UPDATE APPOINTMENT SET AVAILABILITY = " + availability + " WHERE SESSION = " + session + " AND OFFSET = " + offset + ";");
-        Cursor cursor = DB_forRead.rawQuery("SELECT last_insert_rowid() FROM APPOINTMENT WHERE SESSION = " + session + " AND OFFSET = " + offset + ";", new String[]{});
+        Cursor cursor = DB_forRead.rawQuery("SELECT rowid, SESSION, OFFSET FROM APPOINTMENT WHERE SESSION = " + session + " AND OFFSET = " + offset + ";", new String[]{});
         cursor.moveToNext();
-        int rowid = cursor.getInt(cursor.getColumnIndexOrThrow("last_insert_rowid()"));
+        int rowid = cursor.getInt(cursor.getColumnIndexOrThrow("rowid"));
         return rowid;
     }
 
     public void bindAccountWithApp(String name, int rowid){
-        Cursor cursor = DB_forRead.query("ACCOUNTAPP",);
+        Cursor cursor = DB_forRead.query("ACCOUNTAPP", new String[]{"ACCOUNTNAME", "ID"}, "ACCOUNTNAME = ?", new String[]{name},null, null, null);
         if (cursor.getCount() == 0){
             ContentValues inputContent;
             inputContent = db.insertStringInfo("ACCOUNTNAME", name);
@@ -109,12 +109,12 @@ public class DatabaseHelper {
             DB_forWrite.insert("ACCOUNTAPP", null,inputContent);
         }
         else {
-            DB_forWrite.execSQL("UPDATE ACCOUNTAPP SET ID = " + rowid + " WHERE ACCOUNTNAME = " + name);
+            DB_forWrite.execSQL("UPDATE ACCOUNTAPP SET ID = " + rowid + " WHERE ACCOUNTNAME = '" + name + "';");
         }
     }
 
     public String getAppWithAccount(String name){
-        Cursor cursor = DB_forRead.rawQuery("SELECT * FROM ACCOUNTAPP WHERE ACCOUNTNAME = " + name +";", new String[]{});
+        Cursor cursor = DB_forRead.rawQuery("SELECT * FROM ACCOUNTAPP WHERE ACCOUNTNAME = '" + name +"';", new String[]{});
         if (cursor.getCount() == 0){
             return "";
         }
@@ -122,7 +122,7 @@ public class DatabaseHelper {
             int session, offset;
             cursor.moveToNext();
             int temp = cursor.getInt(cursor.getColumnIndexOrThrow("ID"));
-            cursor = DB_forRead.rawQuery("SELECT * FROM APPOINTMENT WHERE rowid = " + ID + ";", new String[]{});
+            cursor = DB_forRead.rawQuery("SELECT * FROM APPOINTMENT WHERE rowid = " + temp + ";", new String[]{});
             cursor.moveToNext();
             session = cursor.getInt(cursor.getColumnIndexOrThrow("SESSION"));
             offset = cursor.getInt(cursor.getColumnIndexOrThrow("OFFSET"));

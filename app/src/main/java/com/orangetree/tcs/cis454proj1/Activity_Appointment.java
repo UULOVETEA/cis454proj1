@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,7 +97,7 @@ public class Activity_Appointment extends AppCompatActivity {
 
 
         TextView title = (TextView) findViewById(R.id.activityAppointment);
-        title.setText("No appointment to display");
+        title.setText("The appointment you are enrolled");
         title.setGravity(Gravity.CENTER);
         title.setTextSize(25);
         Calendar Calendar_temp = Calendar.getInstance();
@@ -114,48 +115,62 @@ public class Activity_Appointment extends AppCompatActivity {
         Button confirm_Button = (Button) findViewById(R.id.confirm_button);
         text5 = (TextView)findViewById(R.id.textView5);
         text5.setText(db_h.getAppWithAccount(Activity_Account.getUsername()));
+        updateText();
         confirm_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 index = appointments_Spinner.getSelectedItemPosition();
-                switch ((int)index){
-                    case 0:
-                        system.makeAppointment(Activity_Account.getUsername(), db_h,1, 0);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        updateText();
-                        break;
+                String name = Constant.getInstance().name;
+                if (db_h.getAppWithAccount(Constant.getInstance().name) == "") {
+                    switch ((int) index) {
+                        case 0:
+                            system.makeAppointment(name, db_h, 1, 0);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
 
-                    case 1:
-                        String name = Constant.getInstance().name;
-                        system.makeAppointment(name, db_h, 1, 1);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        break;
-                    case 2:
-                        system.makeAppointment(Activity_Account.getUsername(), db_h, 2, 0);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        break;
-                    case 3:
-                        system.makeAppointment(Activity_Account.getUsername(), db_h, 2, 1);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        break;
-                    case 4:
-                        system.makeAppointment(Activity_Account.getUsername(), db_h, 3, 0);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        break;
-                    case 5:
-                        system.makeAppointment(Activity_Account.getUsername(), db_h, 3, 1);
-                        list = system.getAppointments(db_h);
-                        updateAdapter(list);
-                        break;
+                        case 1:
+                            system.makeAppointment(name, db_h, 1, 1);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
+                        case 2:
+                            system.makeAppointment(name, db_h, 2, 0);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
+                        case 3:
+                            system.makeAppointment(name, db_h, 2, 1);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
+                        case 4:
+                            system.makeAppointment(name, db_h, 3, 0);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
+                        case 5:
+                            system.makeAppointment(name, db_h, 3, 1);
+                            list = system.getAppointments(db_h);
+                            updateAdapter(list);
+                            updateText();
+                            break;
 
+                    }
+                }
+                else{
+                    CharSequence text = "Sorry, you have already signed up for one appointment.";
+                    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+                    toast.show();
                 }
             }
         });
+
     }
 
     public void updateAdapter(List l){
@@ -167,6 +182,6 @@ public class Activity_Appointment extends AppCompatActivity {
     }
 
     public void updateText(){
-        text5.setText(db_h.getAppWithAccount(Activity_Account.getUsername()));
+        text5.setText(db_h.getAppWithAccount(Constant.getInstance().name));
     }
 }
