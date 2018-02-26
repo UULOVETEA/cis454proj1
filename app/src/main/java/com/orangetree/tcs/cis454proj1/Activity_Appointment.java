@@ -97,7 +97,7 @@ public class Activity_Appointment extends AppCompatActivity {
 
 
         TextView title = (TextView) findViewById(R.id.activityAppointment);
-        title.setText("The appointment you are enrolled");
+        title.setText("The appointment that you are enrolled");
         title.setGravity(Gravity.CENTER);
         title.setTextSize(25);
         Calendar Calendar_temp = Calendar.getInstance();

@@ -46,6 +46,7 @@ public class DatabaseHelper {
             return false;
         }
     }
+
     public boolean updatePhoneAndEmail (String ID, String phone, String email){
         if (databaseContains(ID)) {
             ContentValues inputContent;
@@ -231,6 +232,7 @@ public class DatabaseHelper {
         int temp = cursor.getInt(cursor.getColumnIndexOrThrow("AVAILABILITY"));
         return temp;
     }
+
     public boolean databaseContains(String ID) {
 
         Boolean flag = true;

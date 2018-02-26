@@ -33,9 +33,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/topBar"
-            android:layout_marginStart="28dp">
+            android:layout_below="@+id/topBar">
 
             <TextView
                 android:id="@+id/activityAppointment"
@@ -58,9 +56,9 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/confirm_button"
                 android:layout_below="@+id/activityAppointment"
-                android:layout_marginTop="130dp" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="23dp" />
 
         </RelativeLayout>
 
